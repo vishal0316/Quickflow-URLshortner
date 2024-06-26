@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { ModeToggle } from "./../components/mode-toggle";
+
 import Header from "@/components/header";
 
 const AppLayout = () => {
@@ -9,9 +9,7 @@ const AppLayout = () => {
         <Header />
         <Outlet />
       </main>
-      <div className="p-10">
-        <ModeToggle />
-      </div>
+      <div className="">footer</div>
     </div>
   );
 };
