@@ -16,10 +16,7 @@ const router = createBrowserRouter([
         path: "/",
         element: <LandingPage />,
       },
-      {
-        path: "/auth",
-        element: <Auth />,
-      },
+
       {
         path: "/dashboard",
         element: (
@@ -41,6 +38,10 @@ const router = createBrowserRouter([
         element: <RedirectLink />,
       },
     ],
+  },
+  {
+    path: "/auth",
+    element: <Auth />,
   },
 ]);
 
