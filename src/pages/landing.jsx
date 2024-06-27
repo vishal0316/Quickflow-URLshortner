@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ShineBorder from "@/components/magicui/shine-border";
+import { CanvasRevealEffectDemo } from "@/components/CanvasRevealEffectDemo";
 
 const LandingPage = () => {
   const [longUrl, setLongUrl] = useState();
@@ -15,7 +16,7 @@ const LandingPage = () => {
   };
   return (
     <>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col ">
         <LetterPullup
           className="text-shadow-custom uppercase text-center tracking-wider text-4xl font-extrabold sm:text-6xl lg:text-8xl"
           words={" QuickFlow"}
@@ -27,7 +28,7 @@ const LandingPage = () => {
         </div>
         <form
           onSubmit={handleShorten}
-          className=" sm:h-14 mt-10 flex flex-col sm:flex-row w-full md:w-2/4 gap-2"
+          className="lg:ml-[25%] items-center justify-center sm:h-14 mt-10 flex flex-col sm:flex-row w-full md:w-2/4 gap-2"
         >
           {" "}
           <ShineBorder
@@ -46,6 +47,11 @@ const LandingPage = () => {
             Shorten!
           </Button>
         </form>
+
+        <div>
+          <div className="text-5xl text-center mt-10 font-bold">FAQ</div>
+          <CanvasRevealEffectDemo />
+        </div>
       </div>
     </>
   );
