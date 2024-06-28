@@ -17,7 +17,7 @@ const RequireAuth = () => {
       </div>
       <div>
         <div className="mt-30 flex flex-col items-center gap-10">
-          <h1 className="text-5xl font-extrabold">
+          <h1 className="text-3xl md:text-5xl font-extrabold">
             {searchParams.get("createNew")
               ? "Let's Login First"
               : "  Login / Signup"}
