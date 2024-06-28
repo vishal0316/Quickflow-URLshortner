@@ -1,10 +1,11 @@
 import LetterPullup from "@/components/magicui/letter-pullup";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import ShineBorder from "@/components/magicui/shine-border";
 import { CanvasRevealEffectDemo } from "@/components/CanvasRevealEffectDemo";
+import { Input } from "@/components/ui/input";
 
 const LandingPage = () => {
   const [longUrl, setLongUrl] = useState();

@@ -10,6 +10,7 @@ const RequireAuth = () => {
   const [searchParams] = useSearchParams();
   return (
     <div>
+      <RetroGrid className="-z-30" />
       <div className="p-4">
         <Link to="/">
           <QrCode size={35} className="" />
@@ -35,7 +36,6 @@ const RequireAuth = () => {
             </TabsContent>
           </Tabs>
         </div>
-        <RetroGrid />
       </div>
     </div>
   );
