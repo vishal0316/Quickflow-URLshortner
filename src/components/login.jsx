@@ -1,6 +1,4 @@
-/* eslint-disable no-constant-condition */
-import { useState } from "react";
-
+import { Input } from "./ui/input";
 import {
   Card,
   CardContent,
@@ -8,21 +6,24 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Eye, EyeOff } from "lucide-react";
-import { ConfettiButton } from "./magicui/confetti";
-import { BeatLoader } from "react-spinners";
+} from "./ui/card";
+import { Button } from "./ui/button";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import * as Yup from "yup";
 import Error from "./error";
-import * as Yup from "Yup";
+import { login } from "@/db/apiAuth";
+import { BeatLoader } from "react-spinners";
+import useFetch from "@/hooks/use-fetch";
+// import { UrlState } from "@/context";
 
 const Login = () => {
-  const [formState, setFormState] = useState({
-    isValidForm: false,
-    isSubmitting: false,
-    errors: [],
-  });
+  let [searchParams] = useSearchParams();
+  const longLink = searchParams.get("createNew");
+
+  const navigate = useNavigate();
+
+  const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -30,113 +31,83 @@ const Login = () => {
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prevState) => ({ ...prevState, [name]: value }));
+    setFormData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
+  const { loading, error, fn: fnLogin, data } = useFetch(login, formData);
+  // const { fetchUser } = UrlState();
+
+  useEffect(() => {
+    if (error === null && data) {
+      // fetchUser();
+      navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [error, data]);
+
   const handleLogin = async () => {
-    setFormState({
-      isSubmitting: true,
-      isValidForm: false,
-      errors: [],
-    });
+    setErrors([]);
     try {
       const schema = Yup.object().shape({
         email: Yup.string()
-          .email("Invalid Email")
+          .email("Invalid email")
           .required("Email is required"),
         password: Yup.string()
           .min(6, "Password must be at least 6 characters")
           .required("Password is required"),
       });
+
       await schema.validate(formData, { abortEarly: false });
-      setFormState({
-        isSubmitting: false,
-        isValidForm: true,
-        errors: [],
-      });
+      await fnLogin();
     } catch (e) {
       const newErrors = {};
+
       e?.inner?.forEach((err) => {
         newErrors[err.path] = err.message;
       });
-      setFormState({
-        isSubmitting: false,
-        isValidForm: false,
-        errors: newErrors,
-      });
+
+      setErrors(newErrors);
     }
   };
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
-  };
-
   return (
-    <div>
-      <Card className="w-full max-w-sm">
-        <CardHeader>
-          <CardTitle className="text-2xl">Login</CardTitle>
-          <CardDescription>
-            Enter your email below to login to your account.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email">Email</Label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="m@example.com"
-              required
-              onChange={handleInputChange}
-            />
-            {formState.errors.email && (
-              <Error message={formState.errors.email} />
-            )}
-          </div>
-          <div className="grid gap-2 relative">
-            <Label htmlFor="password">Password</Label>
-            <div className="flex items-center">
-              <Input
-                name="password"
-                id="password"
-                type={passwordVisible ? "text" : "password"}
-                required
-                placeholder="********"
-                className=""
-                onChange={handleInputChange}
-              />
-              <button
-                type="button"
-                onClick={togglePasswordVisibility}
-                className="-ml-10"
-              >
-                {passwordVisible ? <Eye /> : <EyeOff />}
-              </button>
-            </div>
-            {formState.errors.password && (
-              <Error message={formState.errors.password} />
-            )}
-          </div>
-        </CardContent>
-        <CardFooter>
-          <ConfettiButton
-            className="w-full"
-            onClick={handleLogin}
-            triggerAnimation={formState.isValidForm}
-          >
-            {formState.isSubmitting ? (
-              <BeatLoader size={10} color="#262626" />
-            ) : (
-              "Sign In"
-            )}
-          </ConfettiButton>
-        </CardFooter>
-      </Card>
-    </div>
+    <Card>
+      <CardHeader>
+        <CardTitle>Login</CardTitle>
+        <CardDescription>
+          to your account if you already have one
+        </CardDescription>
+        {error && <Error message={error.message} />}
+      </CardHeader>
+      <CardContent className="space-y-2">
+        <div className="space-y-1">
+          <Input
+            name="email"
+            type="email"
+            placeholder="Enter Email"
+            onChange={handleInputChange}
+          />
+        </div>
+        {errors.email && <Error message={errors.email} />}
+        <div className="space-y-1">
+          <Input
+            name="password"
+            type="password"
+            placeholder="Enter Password"
+            onChange={handleInputChange}
+          />
+        </div>
+        {errors.password && <Error message={errors.password} />}
+      </CardContent>
+      <CardFooter>
+        <Button className="w-full" onClick={handleLogin}>
+          {loading ? <BeatLoader size={10} color="#36d7b7" /> : "Login"}
+        </Button>
+      </CardFooter>
+    </Card>
   );
 };
 
