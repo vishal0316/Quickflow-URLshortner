@@ -15,7 +15,7 @@ import Error from "./error";
 import { login } from "@/db/apiAuth";
 import { BeatLoader } from "react-spinners";
 import useFetch from "@/hooks/use-fetch";
-// import { UrlState } from "@/context";
+import { UrlState } from "@/context";
 
 const Login = () => {
   let [searchParams] = useSearchParams();
@@ -25,8 +25,8 @@ const Login = () => {
 
   const [errors, setErrors] = useState({});
   const [formData, setFormData] = useState({
-    email: "",
-    password: "",
+    email: "vishal@gmail.com",
+    password: "123456",
   });
 
   const handleInputChange = (e) => {
@@ -38,12 +38,12 @@ const Login = () => {
   };
 
   const { loading, error, fn: fnLogin, data } = useFetch(login, formData);
-  // const { fetchUser } = UrlState();
+  const { fetchUser } = UrlState();
 
   useEffect(() => {
     if (error === null && data) {
-      // fetchUser();
       navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
+      fetchUser();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, data]);
@@ -89,6 +89,7 @@ const Login = () => {
             type="email"
             placeholder="Enter Email"
             onChange={handleInputChange}
+            value={formData.email}
           />
         </div>
         {errors.email && <Error message={errors.email} />}
@@ -98,6 +99,7 @@ const Login = () => {
             type="password"
             placeholder="Enter Password"
             onChange={handleInputChange}
+            value={formData.password}
           />
         </div>
         {errors.password && <Error message={errors.password} />}
