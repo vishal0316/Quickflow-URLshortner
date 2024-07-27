@@ -1,23 +1,29 @@
 import RetroGrid from "@/components/magicui/retro-grid";
-import { QrCode } from "lucide-react";
-import { Link, useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 import Login from "@/components/login";
 import Signup from "./../components/signup";
+import { UrlState } from "@/context";
+import { useEffect } from "react";
 
 const RequireAuth = () => {
-  const [searchParams] = useSearchParams();
+  let [searchParams] = useSearchParams();
+  const navigate = useNavigate();
+  const { isAuthenticated, loading } = UrlState();
+  const longLink = searchParams.get("createNew");
+
+  useEffect(() => {
+    if (isAuthenticated && !loading)
+      navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, loading, navigate]);
+
   return (
     <div>
-      <RetroGrid className="-z-30" />
-      <div className="p-4">
-        <Link to="/">
-          <QrCode size={35} className="" />
-        </Link>
-      </div>
+      <RetroGrid className="-z-10" />
       <div>
-        <div className="mt-30 flex flex-col items-center gap-10">
+        <div className=" flex flex-col items-center gap-10">
           <h1 className="text-3xl md:text-5xl font-extrabold">
             {searchParams.get("createNew")
               ? "Let's Login First"

@@ -16,3 +16,15 @@ export async function getCurrentuser() {
   if (error) throw new Error(error.message);
   return session.session?.user;
 }
+
+export async function signup({ email, password, name }) {
+  const { data, error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      data: { name },
+    },
+  });
+  if (error) throw new Error(error.message);
+  return data;
+}

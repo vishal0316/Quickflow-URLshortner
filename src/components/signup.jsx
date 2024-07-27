@@ -11,12 +11,11 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as Yup from "yup";
 import Error from "./error";
-import { login } from "@/db/apiAuth";
+import { signup } from "@/db/apiAuth";
 import { BeatLoader } from "react-spinners";
 import useFetch from "@/hooks/use-fetch";
-import { UrlState } from "@/context";
 
-const Login = () => {
+const SignUp = () => {
   let [searchParams] = useSearchParams();
   const longLink = searchParams.get("createNew");
 
@@ -37,21 +36,19 @@ const Login = () => {
     }));
   };
 
-  const { loading, error, fn: fnLogin, data } = useFetch(login, formData);
-  const { fetchUser } = UrlState();
-
+  const { loading, error, fn: fnSignup, data } = useFetch(signup, formData);
   useEffect(() => {
     if (error === null && data) {
       navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
-      fetchUser();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, data]);
 
-  const handleLogin = async () => {
+  const handleSignup = async () => {
     setErrors([]);
     try {
       const schema = Yup.object().shape({
+        name: Yup.string().required("name is required"),
         email: Yup.string()
           .email("Invalid email")
           .required("Email is required"),
@@ -61,7 +58,7 @@ const Login = () => {
       });
 
       await schema.validate(formData, { abortEarly: false });
-      await fnLogin();
+      await fnSignup();
     } catch (e) {
       const newErrors = {};
 
@@ -84,12 +81,13 @@ const Login = () => {
         <div className="space-y-1">
           <Input
             name="name"
-            type="name"
+            type="text"
             placeholder="Enter Name"
             onChange={handleInputChange}
             value={formData.name}
           />
         </div>
+        {errors.name && <Error message={errors.name} />}
         <div className="space-y-1">
           <Input
             name="email"
@@ -112,12 +110,16 @@ const Login = () => {
         {errors.password && <Error message={errors.password} />}
       </CardContent>
       <CardFooter>
-        <Button className="w-full" onClick={handleLogin}>
-          {loading ? <BeatLoader size={10} color="#36d7b7" /> : "Login"}
+        <Button className="w-full" onClick={handleSignup}>
+          {loading ? (
+            <BeatLoader size={10} color="#36d7b7" />
+          ) : (
+            "Create Account"
+          )}
         </Button>
       </CardFooter>
     </Card>
   );
 };
 
-export default Login;
+export default SignUp;
