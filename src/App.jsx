@@ -23,11 +23,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: (
-          <RequireAuth>
-            <Dashboard />
-          </RequireAuth>
-        ),
+        element: <Dashboard />,
       },
       {
         path: "/link/:id",

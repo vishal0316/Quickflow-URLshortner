@@ -12,7 +12,10 @@ const useFetch = (cb, options = {}) => {
       const response = await cb(options, ...args);
       setData(response);
     } catch (error) {
-      setError(error);
+      if (error instanceof Error) {
+        console.log(error, "in usefetch");
+        setError(error);
+      }
     } finally {
       setLoading(false);
     }
