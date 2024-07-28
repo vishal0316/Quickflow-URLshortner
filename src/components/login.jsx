@@ -41,9 +41,17 @@ const Login = () => {
   const { fetchUser } = UrlState();
 
   useEffect(() => {
-    if (error === null && data) {
-      fetchUser();
-      navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
+    if (error === null && data?.data) {
+      fetchUserAndRedirect();
+    }
+
+    async function fetchUserAndRedirect() {
+      try {
+        fetchUser();
+        navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
+      } catch (error) {
+        console.log(error);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [error, data]);
@@ -63,6 +71,7 @@ const Login = () => {
       await schema.validate(formData, { abortEarly: false });
       await fnLogin();
     } catch (e) {
+      console.log(e);
       const newErrors = {};
 
       e?.inner?.forEach((err) => {
@@ -80,7 +89,7 @@ const Login = () => {
         <CardDescription>
           to your account if you already have one
         </CardDescription>
-        {error && <Error message={error.message} />}
+        {/* {error && <Error message={error.message} />} */}
       </CardHeader>
       <CardContent className="space-y-2">
         <div className="space-y-1">

@@ -12,7 +12,9 @@ const UrlProvider = ({ children }) => {
   const isAuthenticated = user?.role === "authenticated";
 
   useEffect(() => {
-    fetchUser();
+    if (!user) {
+      fetchUser();
+    }
   }, []);
 
   return (

@@ -9,17 +9,17 @@ import { useEffect } from "react";
 
 const RequireAuth = () => {
   let [searchParams] = useSearchParams();
+  const { loading, user } = UrlState();
   const navigate = useNavigate();
-  const { isAuthenticated, loading } = UrlState();
-  const longLink = searchParams.get("createNew");
-
+  //if user does exists stop navigation to auth page
   useEffect(() => {
-    if (isAuthenticated && !loading)
-      navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isAuthenticated, loading, navigate]);
-
-  return (
+    if (user) {
+      navigate("/dashboard");
+    }
+  }, []);
+  return loading ? (
+    <div>Loading</div>
+  ) : (
     <div>
       <RetroGrid className="-z-10" />
       <div>
