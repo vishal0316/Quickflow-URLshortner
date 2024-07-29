@@ -23,7 +23,11 @@ const LandingPage = () => {
           words={" QuickFlow"}
           delay={0.05}
         />
-
+        <div className="flex text-center justify-center  mt-4 ">
+          <Button className="h-full" onClick={() => navigate("/auth")}>
+            Get Started
+          </Button>
+        </div>
         <div className="pt-10  text-2xl text-center lg:text-xl">
           The ultimate URL shortener for all your needs!
         </div>

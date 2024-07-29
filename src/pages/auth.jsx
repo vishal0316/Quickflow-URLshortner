@@ -11,6 +11,7 @@ const RequireAuth = () => {
   let [searchParams] = useSearchParams();
   const { loading, user } = UrlState();
   const navigate = useNavigate();
+
   //if user does exists stop navigation to auth page
   useEffect(() => {
     if (user) {

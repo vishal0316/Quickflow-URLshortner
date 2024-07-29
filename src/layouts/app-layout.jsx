@@ -1,9 +1,4 @@
-import {
-  Outlet,
-  useLocation,
-  useNavigate,
-  useSearchParams,
-} from "react-router-dom";
+import { Outlet, useNavigate, useSearchParams } from "react-router-dom";
 
 import Header from "@/components/header";
 import { useEffect } from "react";
