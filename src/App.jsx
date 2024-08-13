@@ -27,11 +27,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/link/:id",
-        element: (
-          <RequireAuth>
-            <LinkPage />
-          </RequireAuth>
-        ),
+        element: <LinkPage />,
       },
       {
         path: "/:id",

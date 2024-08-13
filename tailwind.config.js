@@ -58,7 +58,12 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+
       keyframes: {
+        pulse: {
+          "0%, 100%": { boxShadow: "0 0 0 0 var(--pulse-color)" },
+          "50%": { boxShadow: "0 0 0 8px var(--pulse-color)" },
+        },
         grid: {
           "0%": { transform: "translateY(-50%)" },
           "100%": { transform: "translateY(0)" },
@@ -96,6 +101,7 @@ module.exports = {
         },
       },
       animation: {
+        pulse: "pulse var(--duration) ease-out infinite",
         grid: "grid 15s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",

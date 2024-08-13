@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ShineBorder from "@/components/magicui/shine-border";
 import { CanvasRevealEffectDemo } from "@/components/CanvasRevealEffectDemo";
 import { Input } from "@/components/ui/input";
+import PulsatingButton from "@/components/ui/pulsating-button";
 
 const LandingPage = () => {
   const [longUrl, setLongUrl] = useState();
@@ -24,9 +25,9 @@ const LandingPage = () => {
           delay={0.05}
         />
         <div className="flex text-center justify-center  mt-4 ">
-          <Button className="h-full" onClick={() => navigate("/auth")}>
+          <PulsatingButton className="h-full" onClick={() => navigate("/auth")}>
             Get Started
-          </Button>
+          </PulsatingButton>
         </div>
         <div className="pt-10  text-2xl text-center lg:text-xl">
           The ultimate URL shortener for all your needs!
