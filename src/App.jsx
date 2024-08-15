@@ -5,7 +5,6 @@ import LandingPage from "./pages/landing";
 import Dashboard from "./pages/dashboard";
 import RedirectLink from "./pages/redirect-link";
 import LinkPage from "./pages/link";
-import RequireAuth from "./pages/auth";
 import { ThemeProvider } from "./components/theme-provider";
 import UrlProvider from "./context";
 

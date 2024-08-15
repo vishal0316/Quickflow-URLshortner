@@ -2,14 +2,34 @@ import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Button } from "./ui/button";
 import { BeatLoader } from "react-spinners";
+import useFetch from "@/hooks/use-fetch";
+import { deleteUrl } from "@/db/apiUrls";
 
 const LinkCard = ({ url, fetchUrls }) => {
+  const downloadImage = () => {
+    const imageUrl = url?.qr;
+    const fileName = url?.title;
+
+    const anchor = document.createElement("a");
+    anchor.href = imageUrl;
+    anchor.download = fileName;
+
+    document.body.appendChild(anchor);
+
+    anchor.click();
+
+    // Remove the anchor element after the click
+    setTimeout(() => document.body.removeChild(anchor), 0);
+  };
+
+  const { loading: loadingDelete, fn: fnDelete } = useFetch(deleteUrl, url?.id);
+
   return (
-    <div className="flex flex-col mt-10 md:flex-row gap-5 border p-4 bg-gray-900 rounded-lg">
+    <div className="flex flex-col mt-10 md:flex-row gap-5 border p-4 rounded-lg">
       <img
         src={url?.qr}
         alt="qr code"
-        className="h-32 object-contain  self-start"
+        className="h-32 object-contain rounded-md  self-start"
       />
       <Link to={`/link/${url?.id}`} className="flex flex-col flex-1">
         <span className="text-3xl font-extrabold hover:underline cursor-pointer">
@@ -37,10 +57,16 @@ const LinkCard = ({ url, fetchUrls }) => {
         >
           <Copy />
         </Button>
-        <Button variant="ghost">
+        <Button variant="ghost" onClick={downloadImage}>
           <Download />
         </Button>
-        <Button variant="ghost"></Button>
+        <Button
+          variant="ghost"
+          onClick={() => fnDelete().then(() => fetchUrls())}
+          disable={loadingDelete}
+        >
+          {loadingDelete ? <BeatLoader size={5} color="white" /> : <Trash />}
+        </Button>
       </div>
     </div>
   );
