@@ -24,10 +24,12 @@ const router = createBrowserRouter([
         path: "/dashboard",
         element: <Dashboard />,
       },
+
       {
         path: "/link/:id",
         element: <LinkPage />,
       },
+
       {
         path: "/:id",
         element: <RedirectLink />,

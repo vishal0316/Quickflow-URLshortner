@@ -1,7 +1,8 @@
 import CreateLink from "@/components/create-link";
 import Error from "@/components/error";
 import LinkCard from "@/components/link-card";
-import Globe from "@/components/magicui/globe";
+
+import { OrbitingCirclesDemo } from "@/components/magicui/orbitCircle";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { UrlState } from "@/context";
@@ -72,9 +73,8 @@ const Dashboard = () => {
           </Card>
         </div>
         {/* Hide on mobile, show on medium screens and above */}
-        <div className="hidden md:block relative flex h-full w-full max-w-[25rem] items-center justify-center overflow-hidden rounded-lg border px-40 pb-36 pt-48 md:pb-36 md:shadow-xl">
-          <Globe />
-          <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]"></div>
+        <div className="hidden md:block relative flex h-full w-full max-w-[25rem] items-center justify-center overflow-hidden rounded-lg border   md:shadow-xl">
+          <OrbitingCirclesDemo />
         </div>
       </div>
 

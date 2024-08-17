@@ -59,7 +59,10 @@ export function CreateLink() {
     error,
     data,
     fn: fnCreateUrl,
-  } = useFetch(createUrl, { ...formValues, user_id: user.id });
+  } = useFetch(createUrl, {
+    ...formValues,
+    user_id: user?.id, // Safely accessing user.id
+  });
 
   useEffect(() => {
     if (error) {

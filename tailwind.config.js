@@ -60,6 +60,16 @@ module.exports = {
       },
 
       keyframes: {
+        orbit: {
+          "0%": {
+            transform:
+              "rotate(0deg) translateY(calc(var(--radius) * 1px)) rotate(0deg)",
+          },
+          "100%": {
+            transform:
+              "rotate(360deg) translateY(calc(var(--radius) * 1px)) rotate(-360deg)",
+          },
+        },
         pulse: {
           "0%, 100%": { boxShadow: "0 0 0 0 var(--pulse-color)" },
           "50%": { boxShadow: "0 0 0 8px var(--pulse-color)" },
@@ -101,6 +111,7 @@ module.exports = {
         },
       },
       animation: {
+        orbit: "orbit calc(var(--duration)*1s) linear infinite",
         pulse: "pulse var(--duration) ease-out infinite",
         grid: "grid 15s linear infinite",
         "accordion-down": "accordion-down 0.2s ease-out",
