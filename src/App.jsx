@@ -10,6 +10,7 @@ import UrlProvider from "./context";
 
 const router = createBrowserRouter([
   {
+    path: "/",
     element: <AppLayout />,
     children: [
       {
@@ -29,12 +30,11 @@ const router = createBrowserRouter([
         path: "/link/:id",
         element: <LinkPage />,
       },
-
-      {
-        path: "/:id",
-        element: <RedirectLink />,
-      },
     ],
+  },
+  {
+    path: "/:id",
+    element: <RedirectLink />,
   },
 ]);
 
