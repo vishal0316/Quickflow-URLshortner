@@ -1,5 +1,16 @@
-const LinkPage = () => {
-  return <div>LinkPage</div>;
-};
 
-export default LinkPage;
+const Link= () => {
+  
+
+
+
+
+
+
+
+  return (
+    <div>LinkPage</div>
+  )
+}
+
+export default Link

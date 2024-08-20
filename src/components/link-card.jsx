@@ -4,6 +4,17 @@ import { Button } from "./ui/button";
 import { BeatLoader } from "react-spinners";
 import useFetch from "@/hooks/use-fetch";
 import { deleteUrl } from "@/db/apiUrls";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 
 const LinkCard = ({ url, fetchUrls }) => {
   const downloadImage = () => {
@@ -57,16 +68,40 @@ const LinkCard = ({ url, fetchUrls }) => {
         >
           <Copy />
         </Button>
+
         <Button variant="ghost" onClick={downloadImage}>
           <Download />
         </Button>
-        <Button
-          variant="ghost"
-          onClick={() => fnDelete().then(() => fetchUrls())}
-          disable={loadingDelete}
-        >
-          {loadingDelete ? <BeatLoader size={5} color="white" /> : <Trash />}
-        </Button>
+
+        {/* AlertDialog for Delete Confirmation */}
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button variant="ghost" disable={loadingDelete}>
+              {loadingDelete ? (
+                <BeatLoader size={5} color="white" />
+              ) : (
+                <Trash />
+              )}
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+              <AlertDialogDescription>
+                This action cannot be undone. This will permanently delete your
+                link.
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>Cancel</AlertDialogCancel>
+              <AlertDialogAction
+                onClick={() => fnDelete().then(() => fetchUrls())}
+              >
+                Continue
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
       </div>
     </div>
   );

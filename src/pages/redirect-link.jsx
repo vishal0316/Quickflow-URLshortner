@@ -1,9 +1,9 @@
+import { WavyBackground } from "@/components/ui/wavy-background";
 import { storeClicks } from "@/db/apiClicks";
 import { getLongUrl } from "@/db/apiUrls";
 import useFetch from "@/hooks/use-fetch";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { BarLoader } from "react-spinners";
 
 const RedirectLink = () => {
   const { id } = useParams();
@@ -29,9 +29,11 @@ const RedirectLink = () => {
   if (loading || loadingStats) {
     return (
       <>
-        <BarLoader width={"100%"} color="#36d7b7" />
-        <br />
-        Redirecting...
+        <WavyBackground width={"100%"}>
+          <p className="text-2xl md:text-4xl lg:text-7xl text-white font-bold inter-var text-center">
+            Rediredcting...
+          </p>
+        </WavyBackground>
       </>
     );
   }
