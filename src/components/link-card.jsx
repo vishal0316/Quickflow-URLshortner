@@ -15,6 +15,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { Cover } from "./ui/cover";
 
 const LinkCard = ({ url, fetchUrls }) => {
   const downloadImage = () => {
@@ -37,72 +38,88 @@ const LinkCard = ({ url, fetchUrls }) => {
 
   return (
     <div className="flex flex-col mt-10 md:flex-row gap-5 border p-4 rounded-lg">
-      <img
-        src={url?.qr}
-        alt="qr code"
-        className="h-32 object-contain rounded-md  self-start"
-      />
-      <Link to={`/link/${url?.id}`} className="flex flex-col flex-1">
-        <span className="text-3xl font-extrabold hover:underline cursor-pointer">
-          {url?.title}
-        </span>
-        <span className="text-2xl text-blue-400 font-bold hover:underline cursor-pointer">
-          quickflow/{url?.custom_url ? url?.custom_url : url.short_url}
-        </span>
-        <span className="flex items-center gap-1 hover:underline cursor-pointer">
-          <LinkIcon className="p-1" />
-          {url?.original_url}
-        </span>
-        <span className="flex items-end font-extralight text-sm flex-1">
-          {new Date(url?.created_at).toLocaleString()}
-        </span>
-      </Link>
-      <div className="flex gap-2">
-        <Button
-          variant="ghost"
-          onClick={() =>
-            navigator.clipboard.writeText(
-              `https://quickflow./${url?.short_url}`
-            )
-          }
-        >
-          <Copy />
-        </Button>
+      {/* Left - QR Image */}
+      <Cover className="flex">
+        {url?.qr && (
+          <img
+            src={url.qr}
+            alt="QR code"
+            className="h-32 object-contain mt-4 rounded-md self-start"
+          />
+        )}
+        {/* Right - Details and Actions */}
+        <div className="flex flex-col gap-4 ml-4">
+          <Link to={`/link/${url?.id}`} className="flex flex-col flex-1">
+            {url?.title && (
+              <span className="text-3xl text-primary font-extrabold hover:underline cursor-pointer">
+                {url.title}
+              </span>
+            )}
+            <span className="text-2xl text-blue-600 font-bold hover:underline cursor-pointer">
+              quickflow/{url?.custom_url ? url?.custom_url : url?.short_url}
+            </span>
+            {url?.original_url && (
+              <span className="flex items-center gap-1 hover:underline cursor-pointer">
+                <LinkIcon className="p-1" />
+                {url.original_url}
+              </span>
+            )}
+            <span className="flex items-end font-extralight text-sm flex-1">
+              {new Date(url?.created_at).toLocaleString()}
+            </span>
+          </Link>
 
-        <Button variant="ghost" onClick={downloadImage}>
-          <Download />
-        </Button>
-
-        {/* AlertDialog for Delete Confirmation */}
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
-            <Button variant="ghost" disable={loadingDelete}>
-              {loadingDelete ? (
-                <BeatLoader size={5} color="white" />
-              ) : (
-                <Trash />
-              )}
+          {/* Action Buttons */}
+          <div className="flex gap-4 ">
+            {/* Copy Link */}
+            <Button
+              variant="ghost"
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  `https://quickflow/${url?.short_url}`
+                )
+              }
+            >
+              <Copy />
             </Button>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-              <AlertDialogDescription>
-                This action cannot be undone. This will permanently delete your
-                link.
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>Cancel</AlertDialogCancel>
-              <AlertDialogAction
-                onClick={() => fnDelete().then(() => fetchUrls())}
-              >
-                Continue
-              </AlertDialogAction>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
-      </div>
+
+            {/* Download Image */}
+            <Button variant="ghost" onClick={downloadImage}>
+              <Download />
+            </Button>
+
+            {/* Delete Confirmation */}
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button variant="ghost" disable={loadingDelete}>
+                  {loadingDelete ? (
+                    <BeatLoader size={5} color="white" />
+                  ) : (
+                    <Trash />
+                  )}
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your link.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction
+                    onClick={() => fnDelete().then(() => fetchUrls())}
+                  >
+                    Continue
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
+        </div>
+      </Cover>
     </div>
   );
 };
