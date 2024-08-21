@@ -10,6 +10,7 @@ import { Copy, Download, LinkIcon, Trash } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Globe from "@/components/magicui/globe";
+import LocationStats from "@/components/location-stats";
 
 const Link = () => {
   const downloadImage = () => {
@@ -150,6 +151,7 @@ const Link = () => {
 
               <CardTitle>Location Data</CardTitle>
 
+              <LocationStats className="rounded" stats={stats} />
               <CardTitle>Device Info</CardTitle>
             </CardContent>
           ) : (
