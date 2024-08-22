@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Globe from "@/components/magicui/globe";
 import LocationStats from "@/components/location-stats";
+import { DeviceStats } from "@/components/device-stats";
 
 const Link = () => {
   const downloadImage = () => {
@@ -153,6 +154,7 @@ const Link = () => {
 
               <LocationStats className="rounded" stats={stats} />
               <CardTitle>Device Info</CardTitle>
+              <DeviceStats className="rounded" stats={stats} />
             </CardContent>
           ) : (
             <CardContent>

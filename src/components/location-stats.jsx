@@ -53,7 +53,6 @@ import {
   CardContent,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import {
   ChartContainer,
@@ -87,9 +86,7 @@ export default function LocationStats({ stats = [] }) {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle>Location Data</CardTitle>
-      </CardHeader>
+      <CardHeader></CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <ResponsiveContainer width="100%" height={3000}>
