@@ -1,4 +1,3 @@
-console.log("apiUrls.js is loaded");
 import { UrlState } from "@/context";
 import useFetch from "@/hooks/use-fetch";
 import { useNavigate, useParams } from "react-router-dom";
@@ -12,6 +11,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Globe from "@/components/magicui/globe";
 import LocationStats from "@/components/location-stats";
 import { DeviceStats } from "@/components/device-stats";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Link = () => {
   const downloadImage = () => {
@@ -66,6 +67,7 @@ const Link = () => {
 
   return (
     <>
+      <ToastContainer position="top-right" autoClose={3000} />
       {(loading || loadingStats) && (
         <BarLoader className="mb-4" width={"100%"} color="white" />
       )}
@@ -75,7 +77,7 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            href={`https://quickflowurl.vercel.app//${link}`} // Add 'http://' before 'localhost'
+            href={`https://quickflowurl.vercel.app/${link}`} // Add 'http://' before 'localhost'
             target="_blank"
             rel="noopener noreferrer" // Add this for security reasons
             className="text-3xl sm:text-4xl  font-bold hover:underline cursor-pointer"
@@ -96,9 +98,12 @@ const Link = () => {
           <div className="flex gap-2">
             <Button
               variant="ghost"
-              onClick={() =>
-                navigator.clipboard.writeText(`quickshort/${link}`)
-              }
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `https://quickflowurl.vercel.app/${link}`
+                );
+                toast.success("Link Copied!");
+              }}
             >
               <Copy />
             </Button>

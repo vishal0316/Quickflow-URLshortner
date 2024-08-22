@@ -16,6 +16,8 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Cover } from "./ui/cover";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const LinkCard = ({ url, fetchUrls }) => {
   const downloadImage = () => {
@@ -38,6 +40,7 @@ const LinkCard = ({ url, fetchUrls }) => {
 
   return (
     <div className="flex flex-col mt-10 md:flex-row gap-5 border p-4 rounded-lg">
+      <ToastContainer position="top-right" autoClose={3000} />
       {/* Left - QR Image */}
       <Cover className="flex">
         {url?.qr && (
@@ -77,11 +80,12 @@ const LinkCard = ({ url, fetchUrls }) => {
             {/* Copy Link */}
             <Button
               variant="ghost"
-              onClick={() =>
+              onClick={() => {
                 navigator.clipboard.writeText(
                   `https://quickflowurl.vercel.app/${url?.short_url}`
-                )
-              }
+                );
+                toast.success("Link Copied!");
+              }}
             >
               <Copy />
             </Button>
