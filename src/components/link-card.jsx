@@ -61,7 +61,9 @@ const LinkCard = ({ url, fetchUrls }) => {
             {url?.original_url && (
               <span className="flex items-center gap-1 hover:underline cursor-pointer">
                 <LinkIcon className="p-1" />
-                {url.original_url}
+                <span className="truncate max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
+                  {url.original_url}
+                </span>
               </span>
             )}
             <span className="flex items-end font-extralight text-sm flex-1">
