@@ -75,7 +75,7 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            href={`http://localhost:5175/${link}`} // Add 'http://' before 'localhost'
+            href={`https://quickflowurl.vercel.app//${link}`} // Add 'http://' before 'localhost'
             target="_blank"
             rel="noopener noreferrer" // Add this for security reasons
             className="text-3xl sm:text-4xl  font-bold hover:underline cursor-pointer"

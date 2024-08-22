@@ -56,7 +56,8 @@ const LinkCard = ({ url, fetchUrls }) => {
               </span>
             )}
             <span className="text-2xl text-blue-600 font-bold hover:underline cursor-pointer">
-              quickflow/{url?.custom_url ? url?.custom_url : url?.short_url}
+              https://quickflowurl.vercel.app/
+              {url?.custom_url ? url?.custom_url : url?.short_url}
             </span>
             {url?.original_url && (
               <span className="flex items-center gap-1 hover:underline cursor-pointer">
@@ -78,7 +79,7 @@ const LinkCard = ({ url, fetchUrls }) => {
               variant="ghost"
               onClick={() =>
                 navigator.clipboard.writeText(
-                  `https://quickflow/${url?.short_url}`
+                  `https://quickflowurl.vercel.app/${url?.short_url}`
                 )
               }
             >
