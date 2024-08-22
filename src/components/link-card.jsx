@@ -42,41 +42,41 @@ const LinkCard = ({ url, fetchUrls }) => {
     <div className="flex flex-col mt-10 md:flex-row gap-5 border p-4 rounded-lg">
       <ToastContainer position="top-right" autoClose={3000} />
       {/* Left - QR Image */}
-      <Cover className="flex">
+      <Cover className="flex flex-wrap">
         {url?.qr && (
           <img
             src={url.qr}
             alt="QR code"
-            className="h-32 object-contain mt-4 rounded-md self-start"
+            className="h-32 object-contain mt-4 ml-3 rounded-md self-start"
           />
         )}
         {/* Right - Details and Actions */}
-        <div className="flex flex-col gap-4 ml-4">
+        <div className="flex flex-col gap-4 ml-4 flex-1 max-w-full">
           <Link to={`/link/${url?.id}`} className="flex flex-col flex-1">
             {url?.title && (
-              <span className="text-3xl text-primary font-extrabold hover:underline cursor-pointer">
+              <span className="text-2xl sm:text-3xl text-primary font-extrabold hover:underline cursor-pointer">
                 {url.title}
               </span>
             )}
-            <span className="text-2xl text-blue-600 font-bold hover:underline cursor-pointer">
+            <span className="text-base sm:text-lg md:text-xl text-blue-600 font-bold hover:underline cursor-pointer break-words">
               https://quickflowurl.vercel.app/
               {url?.custom_url ? url?.custom_url : url?.short_url}
             </span>
             {url?.original_url && (
               <span className="flex items-center gap-1 hover:underline cursor-pointer">
                 <LinkIcon className="p-1" />
-                <span className="truncate max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-                  {`${url.original_url.slice(0, 12)}...`}
+                <span className="truncate max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg text-sm sm:text-base md:text-lg">
+                  {`${url.original_url.slice(0, 40)}...`}
                 </span>
               </span>
             )}
-            <span className="flex items-end font-extralight text-sm flex-1">
+            <span className="flex items-end font-extralight text-xs sm:text-sm flex-1">
               {new Date(url?.created_at).toLocaleString()}
             </span>
           </Link>
 
           {/* Action Buttons */}
-          <div className="flex gap-4 ">
+          <div className="flex flex-wrap gap-4">
             {/* Copy Link */}
             <Button
               variant="ghost"

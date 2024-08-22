@@ -80,7 +80,7 @@ const Link = () => {
             href={`https://quickflowurl.vercel.app/${link}`} // Add 'http://' before 'localhost'
             target="_blank"
             rel="noopener noreferrer" // Add this for security reasons
-            className="text-3xl sm:text-4xl  font-bold hover:underline cursor-pointer"
+            className="text-xl sm:text-2xl  font-bold hover:underline cursor-pointer"
           >
             https://quickflowurl.vercel.app/{link}
           </a>
@@ -149,7 +149,7 @@ const Link = () => {
                   </CardContent>
                 </Card>
 
-                <div className="relative flex h-full w-full max-w-[24rem] items-center justify-center overflow-hidden rounded-lg border bg-background px-6 md:pb-[21rem]  md:shadow-xl flex-1">
+                <div className="hidden md:flex relative h-full w-full max-w-[24rem] items-center justify-center overflow-hidden rounded-lg border bg-background px-6 md:pb-[21rem] md:shadow-xl flex-1">
                   <Globe />
                   <div className="pointer-events-none absolute inset-0 h-full bg-[radial-gradient(circle_at_50%_200%,rgba(0,0,0,0.2),rgba(255,255,255,0))]" />
                 </div>
