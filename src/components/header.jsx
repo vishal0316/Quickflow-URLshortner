@@ -1,5 +1,11 @@
-import { QrCode } from "lucide-react";
+import { LinkIcon, QrCode, UserCircle } from "lucide-react";
 import { Link } from "react-router-dom";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import { ModeToggle } from "./mode-toggle";
 import { logout } from "@/db/apiAuth";
@@ -24,11 +30,26 @@ const Header = () => {
 
         <div className="flex gap-4 ">
           <ModeToggle />
-          {user && (
-            <Button onClick={handleLogout} className="logout">
-              Logout
-            </Button>
-          )}
+          <DropdownMenu>
+            <DropdownMenuTrigger>
+              <UserCircle />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>
+                {user && (
+                  <Button onClick={handleLogout} className="logout">
+                    Logout
+                  </Button>
+                )}
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link to="/dashboard" className="flex">
+                  <LinkIcon className="mr-2 h-4 w-4" />
+                  My Links
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </nav>
     </div>

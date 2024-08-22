@@ -10,6 +10,7 @@ import PulsatingButton from "@/components/ui/pulsating-button";
 import { Feature } from "@/components/feature";
 import { Reviews } from "@/components/Reviews";
 import { Security } from "@/components/Security";
+import Footer from "@/components/footer";
 
 const LandingPage = () => {
   const [longUrl, setLongUrl] = useState();
@@ -74,6 +75,8 @@ const LandingPage = () => {
           <div className="text-5xl text-center  font-bold">FAQ</div>
           <CanvasRevealEffectDemo />
         </div>
+        {/* Footer */}
+        <Footer />
       </div>
     </>
   );
