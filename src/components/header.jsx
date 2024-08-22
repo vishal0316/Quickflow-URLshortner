@@ -14,20 +14,21 @@ const Header = () => {
     logout();
     fetchUser();
   }
+
   return (
     <div className="">
       <nav className="flex py-4 justify-between">
         <Link to="/">
           <QrCode size={35} className="" />
         </Link>
-        {user && (
-          <Button onClick={handleLogout} className="logout">
-            Logout
-          </Button>
-        )}
 
         <div className="flex gap-4 ">
           <ModeToggle />
+          {user && (
+            <Button onClick={handleLogout} className="logout">
+              Logout
+            </Button>
+          )}
         </div>
       </nav>
     </div>

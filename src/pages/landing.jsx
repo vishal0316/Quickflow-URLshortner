@@ -7,6 +7,7 @@ import ShineBorder from "@/components/magicui/shine-border";
 import { CanvasRevealEffectDemo } from "@/components/CanvasRevealEffectDemo";
 import { Input } from "@/components/ui/input";
 import PulsatingButton from "@/components/ui/pulsating-button";
+import { HeroScroll } from "@/components/ui/HeroScroll";
 
 const LandingPage = () => {
   const [longUrl, setLongUrl] = useState();
@@ -53,9 +54,12 @@ const LandingPage = () => {
             Shorten!
           </Button>
         </form>
+        {/*Feature Section */}
+        <div></div>
 
-        <div>
-          <div className="text-5xl text-center mt-10 font-bold">FAQ</div>
+        {/* FAQ */}
+        <div className="-mt-64">
+          <div className="text-5xl text-center  font-bold">FAQ</div>
           <CanvasRevealEffectDemo />
         </div>
       </div>
