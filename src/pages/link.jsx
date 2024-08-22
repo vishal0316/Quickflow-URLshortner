@@ -82,7 +82,7 @@ const Link = () => {
             rel="noopener noreferrer" // Add this for security reasons
             className="text-3xl sm:text-4xl  font-bold hover:underline cursor-pointer"
           >
-            quickshort/{link}
+            https://quickflowurl.vercel.app/{link}
           </a>
           <a
             href={url?.original_url}

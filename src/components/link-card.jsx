@@ -66,7 +66,7 @@ const LinkCard = ({ url, fetchUrls }) => {
               <span className="flex items-center gap-1 hover:underline cursor-pointer">
                 <LinkIcon className="p-1" />
                 <span className="truncate max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
-                  {url.original_url}
+                  {`${url.original_url.slice(0, 12)}...`}
                 </span>
               </span>
             )}
