@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { IconChartArea } from "@tabler/icons-react";
+
 import { Link, LockKeyhole, ThumbsUp } from "lucide-react";
 
 export function Security() {
@@ -26,7 +26,7 @@ export function Security() {
       title: "Statistics",
       description:
         "Check the number of clicks that your shortened URL received.",
-      icon: <IconChartArea />,
+      icon: <LockKeyhole />,
     },
   ];
   return (
