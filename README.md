@@ -1,10 +1,11 @@
-# Quickshort - URL Shortener App
 
-Quickshort is a modern URL shortener application designed to simplify long URLs into shorter ones. Built with React, Supabase, and enhanced with Shadcn, Magic UI, and Ascernity UI for a superior frontend experience. It utilizes react-qrcode-logo for QR code generation, react-toastify for notifications, and integrates Recharts and Shadcn Charts for data visualization in graphs.
+# Quickflow - URL Shortener App
+
+Quickflow is a modern URL shortener application designed to simplify long URLs into shorter ones. Built with React, Supabase, and enhanced with Shadcn, Magic UI, and Ascernity UI for a superior frontend experience. It utilizes react-qrcode-logo for QR code generation, react-toastify for notifications, and integrates Recharts and Shadcn Charts for data visualization in graphs.
 
 ## Features
 
-Quickshort offers a range of features designed to simplify URL management and enhance user experience:
+Quickflow offers a range of features designed to simplify URL management and enhance user experience:
 
 - **Shorten URLs**: Quickly convert long URLs into shorter ones, making them easier to share and manage.
 - **Custom URLs**: Create personalized short URLs to match your branding or campaign names.
@@ -14,7 +15,6 @@ Quickshort offers a range of features designed to simplify URL management and en
 - **User Authentication**: Secure login and registration powered by Supabase, ensuring safe access to your account.
 - **Interactive Charts**: Visualize usage statistics with interactive charts, providing insights into link performance.
 - **Real-time Notifications**: Receive instant notifications about URL activities and system updates with react-toastify.
-
 
 ## Technologies Used
 
@@ -28,7 +28,7 @@ Quickshort offers a range of features designed to simplify URL management and en
 ## Installation and Setup
 
 1. Clone the repository: `git clone https://your-repository-url.git`
-2. Navigate to the project directory: `cd Quickshort`
+2. Navigate to the project directory: `cd Quickflow`
 3. Install dependencies: `npm install` or `yarn install`
 4. Set up environment variables as per the `.env.example` file.
 5. Start the development server: `npm run dev` or `yarn start`
