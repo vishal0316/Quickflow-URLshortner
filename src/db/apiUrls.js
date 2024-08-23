@@ -1,7 +1,7 @@
 import { supabase, supabaseUrl } from "./supabase";
 
 export async function getUrls(user_id) {
-  let {data, error} = await supabase
+  let { data, error } = await supabase
     .from("urls")
     .select("*")
     .eq("user_id", user_id);
@@ -14,8 +14,8 @@ export async function getUrls(user_id) {
   return data;
 }
 
-export async function getUrl({id, user_id}) {
-  const {data, error} = await supabase
+export async function getUrl({ id, user_id }) {
+  const { data, error } = await supabase
     .from("urls")
     .select("*")
     .eq("id", id)
@@ -31,7 +31,7 @@ export async function getUrl({id, user_id}) {
 }
 
 export async function getLongUrl(id) {
-  let {data: shortLinkData, error: shortLinkError} = await supabase
+  let { data: shortLinkData, error: shortLinkError } = await supabase
     .from("urls")
     .select("id, original_url")
     .or(`short_url.eq.${id},custom_url.eq.${id}`)
@@ -45,11 +45,14 @@ export async function getLongUrl(id) {
   return shortLinkData;
 }
 
-export async function createUrl({title, longUrl, customUrl, user_id}, qrcode) {
+export async function createUrl(
+  { title, longUrl, customUrl, user_id },
+  qrcode
+) {
   const short_url = Math.random().toString(36).substring(2, 6);
   const fileName = `QR-${short_url}`;
 
-  const {error: storageError} = await supabase.storage
+  const { error: storageError } = await supabase.storage
     .from("QRs")
     .upload(fileName, qrcode);
 
@@ -57,7 +60,7 @@ export async function createUrl({title, longUrl, customUrl, user_id}, qrcode) {
 
   const qr = `${supabaseUrl}/storage/v1/object/public/QRs/${fileName}`;
 
-  const {data, error} = await supabase
+  const { data, error } = await supabase
     .from("urls")
     .insert([
       {
@@ -80,7 +83,7 @@ export async function createUrl({title, longUrl, customUrl, user_id}, qrcode) {
 }
 
 export async function deleteUrl(id) {
-  const {data, error} = await supabase.from("urls").delete().eq("id", id);
+  const { data, error } = await supabase.from("urls").delete().eq("id", id);
 
   if (error) {
     console.error(error);
@@ -89,5 +92,3 @@ export async function deleteUrl(id) {
 
   return data;
 }
-
-

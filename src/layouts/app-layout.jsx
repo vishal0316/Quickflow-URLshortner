@@ -16,7 +16,7 @@ const AppLayout = () => {
       navigate(`/dashboard?${longLink ? `createNew=${longLink}` : ""}`);
     }
     if (!isAuthenticated && !loading && !user) {
-      navigate("/auth");
+      navigate("/");
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isAuthenticated, loading, navigate, user]);

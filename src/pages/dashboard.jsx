@@ -34,8 +34,10 @@ const Dashboard = () => {
   );
 
   useEffect(() => {
-    fnUrls();
-  }, []);
+    if (user?.id) {
+      fnUrls();
+    }
+  }, [user?.id]);
 
   useEffect(() => {
     if (urls?.length) fnClicks();
