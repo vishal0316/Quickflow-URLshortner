@@ -19,11 +19,11 @@ export async function getUrl({ id }) {
     .from("urls")
     .select("*")
     .eq("id", id)
-    .single();
+    .single(); // Only filter by 'id'
 
   if (error) {
     console.error(error);
-    throw new Error("Short Url not found");
+    throw new Error("Short URL not found");
   }
 
   return data;

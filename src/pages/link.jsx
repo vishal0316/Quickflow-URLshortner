@@ -38,6 +38,7 @@ const Link = () => {
 
   const navigate = useNavigate();
 
+  // Fetch the URL without requiring user_id
   const { loading, data: url, fn, error } = useFetch(getUrl, { id });
 
   const {
