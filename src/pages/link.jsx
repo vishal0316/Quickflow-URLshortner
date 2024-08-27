@@ -1,4 +1,4 @@
-import { UrlState } from "@/context";
+// import { UrlState } from "@/context";
 import useFetch from "@/hooks/use-fetch";
 import { useNavigate, useParams } from "react-router-dom";
 import { BarLoader, BeatLoader } from "react-spinners";
@@ -34,14 +34,11 @@ const Link = () => {
     document.body.removeChild(anchor);
   };
   const { id } = useParams();
-  const { user } = UrlState();
+  // const { user } = UrlState();
+
   const navigate = useNavigate();
-  const {
-    loading,
-    data: url,
-    fn,
-    error,
-  } = useFetch(getUrl, { id, user_id: user?.id });
+
+  const { loading, data: url, fn, error } = useFetch(getUrl, { id });
 
   const {
     loading: loadingStats,
