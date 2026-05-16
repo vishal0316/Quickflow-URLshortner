@@ -59,7 +59,7 @@ const LinkCard = ({ url, fetchUrls }) => {
               </span>
             )}
             <span className="text-base sm:text-lg md:text-xl text-blue-600 font-bold hover:underline cursor-pointer break-words">
-              https://quickflowurl.vercel.app/
+              {import.meta.env.VITE_APP_URL}/
               {url?.custom_url ? url?.custom_url : url?.short_url}
             </span>
             {url?.original_url && (
@@ -82,7 +82,7 @@ const LinkCard = ({ url, fetchUrls }) => {
               variant="ghost"
               onClick={() => {
                 navigator.clipboard.writeText(
-                  `https://quickflowurl.vercel.app/${url?.short_url}`
+                  `${import.meta.env.VITE_APP_URL}/${url?.short_url}`
                 );
                 toast.success("Link Copied!");
               }}

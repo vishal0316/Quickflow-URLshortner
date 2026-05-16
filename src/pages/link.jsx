@@ -75,12 +75,12 @@ const Link = () => {
             {url?.title}
           </span>
           <a
-            href={`https://quickflowurl.vercel.app/${link}`} // Add 'http://' before 'localhost'
+            href={`${import.meta.env.VITE_APP_URL}/${link}`} // Add 'http://' before 'localhost'
             target="_blank"
             rel="noopener noreferrer" // Add this for security reasons
             className="text-xl sm:text-2xl  font-bold hover:underline cursor-pointer"
           >
-            https://quickflowurl.vercel.app/{link}
+            {import.meta.env.VITE_APP_URL}/{link}
           </a>
           <a
             href={url?.original_url}
@@ -98,7 +98,7 @@ const Link = () => {
               variant="ghost"
               onClick={() => {
                 navigator.clipboard.writeText(
-                  `https://quickflowurl.vercel.app/${link}`
+                  `${import.meta.env.VITE_APP_URL}/${link}`
                 );
                 toast.success("Link Copied!");
               }}
